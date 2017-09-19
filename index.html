@@ -24,28 +24,22 @@
   stroke-linecap: round;
   stroke-linejoin: round;
 }
+    
+.route {
+  fill: none;
+  stroke-width: 0;
+}
+
+.plane {
+  fill: #fff;
+  stroke-width: 0;
+}
   </style>
 </head>
 
 <body>
+  <div id="flightMap"></div>
   <script>
-    function rAFscroll (fn) {
-  const rAF = window.requestAnimationFrame || window.webkitRequestAnimationFrame ||
-               window.mozRequestAnimationFrame || window.msRequestAnimationFrame ||
-               window.oRequestAnimationFrame || function (callback) { setTimeout(callback, 1000 / 60) }
-
-  let lastPosition = -1
-  function loop () {
-    // Avoid calculations if not needed
-    if (lastPosition === window.pageYOffset) {
-      rAF(loop)
-      return false
-    } else lastPosition = window.pageYOffset
-    fn()
-    rAF(loop)
-  }
-  loop()
-}
 
 function initMap(selector) {
   const $flightmap = $(selector)
@@ -155,7 +149,7 @@ function initMap(selector) {
     }
 
     flyBatch(200)
-    rAFscroll(flyBatch)
+    setInterval(flyBatch, 300)
   }
 
   d3.queue()
@@ -164,5 +158,6 @@ function initMap(selector) {
     .await(ready)
 }
 
+    initMap('#flightMap')
   </script>
 </body>
