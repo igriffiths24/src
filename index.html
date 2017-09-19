@@ -133,7 +133,7 @@ function initMap(selector) {
     })
 
     let start = 0
-    function flyBatch (flightCnt = 10) {
+    function flyBatch (flightCnt = 30) {
       if ($flightmap.offset().top + $flightmap.height() < $(window).scrollTop()) return
 
       let end = start + flightCnt
